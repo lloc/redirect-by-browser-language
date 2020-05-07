@@ -29,10 +29,10 @@ add_action( 'template_redirect', function() {
 
 		$redirect = $sites[ $accepted ] ?? $default;
 
-		echo 'Sites: ', print_r( $sites, true );
-		echo 'Default ', print_r( $default, true );
-		echo 'Accepted ', print_r( $accepted, true );
-		echo 'Redirect ', print_r( $redirect, true );
+		echo 'Sites: ', print_r( $sites, true ), PHP_EOL;
+		echo 'Default ', print_r( $default, true ), PHP_EOL;
+		echo 'Accepted ', print_r( $accepted, true ), PHP_EOL;
+		echo 'Redirect ', print_r( $redirect, true ), PHP_EOL;
 
 		die();
 
