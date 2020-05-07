@@ -26,6 +26,8 @@ add_action( 'init', function() {
 		$language = isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ? Locale::acceptFromHttp( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) : $default;
 		$redirect = $sites[ $language ] ?? $sites[ $default ];
 
+		error_log( 'Redirect to ' . $redirect );
+
 		wp_redirect( $redirect, 307 );
 		exit;
 	}
