@@ -20,7 +20,7 @@ add_action( 'template_redirect', function() {
 		];
 
 		$sites   = apply_filters( 'rbbl_sites', $options['sites'] );
-		$default = apply_filters( 'rbbl_default', array_keys( $options['default'] ) );
+		$default = apply_filters( 'rbbl_default', $options['default'] );
 
 		$accepted = '';
 		if ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
@@ -28,6 +28,13 @@ add_action( 'template_redirect', function() {
 		}
 
 		$redirect = $sites[ $accepted ] ?? $default;
+
+		echo 'Sites: ', print_r( $sites, true );
+		echo 'Default ', print_r( $default, true );
+		echo 'Accepted ', print_r( $accepted, true );
+		echo 'Redirect ', print_r( $redirect, true );
+
+		die();
 
 		wp_redirect( $redirect, 307 );
 		exit;
