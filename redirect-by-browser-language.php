@@ -12,21 +12,22 @@ Author URI: http://lloc.de/
 add_action( 'init', function() {
 	if ( is_front_page() ) {
 		$options = [
-			'sites'    => [
-				'it' => 'https://www.freely.de/it/',
+			'sites' => [
 				'en' => 'https://www.freely.de/en/',
 				'de' => 'https://www.freely.de/de/',
 			],
-			'language' => 'it',
+			'default' => 'https://www.freely.de/it/',
 		];
 
-		$sites   = apply_filters( 'rbbl_active_sites', $options['sites'] );
-		$default = apply_filters( 'rbbl_default_language', $options['language'] );
+		$sites   = apply_filters( 'rbbl_sites', $options['sites'] );
+		$default = apply_filters( 'rbbl_default', array_keys( $options['default'] ) );
 
-		$language = isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ? Locale::acceptFromHttp( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) : $default;
-		$redirect = $sites[ $language ] ?? $sites[ $default ];
+		$accepted = '';
+		if ( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+			$accepted = Locale::acceptFromHttp( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+		}
 
-		error_log( 'Redirect to ' . $redirect );
+		$redirect = $sites[ $accepted ] ?? $default;
 
 		wp_redirect( $redirect, 307 );
 		exit;
