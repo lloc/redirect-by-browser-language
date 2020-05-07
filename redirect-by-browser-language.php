@@ -9,7 +9,7 @@ Author: Dennis Ploetner
 Author URI: http://lloc.de/
 */
 
-add_action( 'init', function() {
+add_action( 'template_redirect', function() {
 	if ( is_front_page() ) {
 		$options = [
 			'sites' => [
