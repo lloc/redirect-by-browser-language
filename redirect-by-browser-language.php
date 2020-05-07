@@ -24,10 +24,13 @@ add_action( 'init', function() {
 		$languages = isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ? explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) : [];
 		$sites     = apply_filters( 'rbbl_active_language', $options['sites'] );
 
-		foreach ( $languages as $str ) {
-			$str = substr( $str, 0, 2 );
-			if ( isset( $sites[ $str ] ) ) {
-				wp_redirect( $sites[ $str ], 307 );
+		if ( ! empty( $languages ) ) {
+			foreach ( $languages as $str ) {
+				$str = substr( $str, 0, 2 );
+				if ( isset( $sites[ $str ] ) ) {
+					wp_redirect( $sites[ $str ], 307 );
+					exit;
+				}
 			}
 		}
 	}
