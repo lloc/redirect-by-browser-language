@@ -24,7 +24,7 @@ add_action( 'init', function() {
 		$default = apply_filters( 'rbbl_default_language', $options['language'] );
 
 		$language = isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ? Locale::acceptFromHttp( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) : $default;
-		$redirect = $sites[ $language ] ?? $default;
+		$redirect = $sites[ $language ] ?? $sites[ $default ];
 
 		wp_redirect( $redirect, 307 );
 		exit;
